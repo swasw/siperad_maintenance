@@ -4,6 +4,7 @@ use App\Http\Controllers\AngkatanController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\InputMultipleController;
 use App\Http\Controllers\JadwalRuanganController;
 use App\Http\Controllers\JamController;
 use App\Http\Controllers\MahasiswaController;
@@ -209,5 +210,10 @@ Route::middleware(['auth', 'user-access:1'])->group(function () {
     Route::controller(FeedbackController::class)->group(function () {
         Route::get('/feedback', 'index')->name('feedback.index');
         Route::delete('/feedback/hapus/{id}', 'destroy')->name('feedback.destroy');
+    });
+
+    Route::controller(InputMultipleController::class)->group(function () {
+        Route::get('/input-multiple', 'index')->name('input-multiple.index');
+        Route::post('/input-multiple', 'store')->name('input-multiple.store');
     });
 });

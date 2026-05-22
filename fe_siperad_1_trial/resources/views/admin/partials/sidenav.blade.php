@@ -71,6 +71,10 @@
                     <div class="sb-nav-link-icon"><i class="fas fa-box"></i></div>
                     Feedback
                 </a>
+                <a class="nav-link" href="{{ route('input-multiple.index') }}">
+                    <div class="sb-nav-link-icon"><i class="fas fa-file-excel"></i></div>
+                    Input Multiple Data
+                </a>
             </div>
         </div>
         <div class="sb-sidenav-footer">
