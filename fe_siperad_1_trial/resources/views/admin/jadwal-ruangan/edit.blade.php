@@ -139,6 +139,25 @@
 
 
                         <div class="form-group mb-2">
+                            <label for="user_id_input">Penanggungjawab (PJ)</label>
+                            
+                            @php
+                                $pjText = '';
+                                if(isset($data['penanggungjawab'])) {
+                                    $pjText = $data['penanggungjawab']['username'] . ' - ' . $data['penanggungjawab']['name'];
+                                }
+                            @endphp
+
+                            <input list="users-list" id="user_id_input" class="form-control" placeholder="Ketik untuk mencari username..." value="{{ $pjText }}">
+                            <datalist id="users-list">
+                                @foreach ($users as $u)
+                                    <option value="{{ $u->username }} - {{ $u->name }}" data-id="{{ $u->id }}"></option>
+                                @endforeach
+                            </datalist>
+                            <input type="hidden" name="user_id" id="user_id_hidden" value="{{ $data['user_id'] ?? '' }}">
+                        </div>
+
+                        <div class="form-group mb-2">
                             <label for="">Status Ruang</label>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="status_ruang" id="tersedia"
@@ -162,4 +181,26 @@
 
         </div>
     </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const input = document.getElementById('user_id_input');
+            const hidden = document.getElementById('user_id_hidden');
+            const options = document.querySelectorAll('#users-list option');
+
+            input.addEventListener('input', function() {
+                let found = false;
+                for (let i = 0; i < options.length; i++) {
+                    if (options[i].value === input.value) {
+                        hidden.value = options[i].getAttribute('data-id');
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found && input.value.trim() === '') {
+                    hidden.value = ''; // Kosongkan jika dihapus
+                }
+            });
+        });
+    </script>
 @endsection

@@ -49,6 +49,7 @@
                                 <th>Hari</th>
                                 <th>Jam Mulai</th>
                                 <th>Jam Selesai</th>
+                                <th>Penanggungjawab</th>
                                 <th>Status Ruang</th>
                                 <th>Aksi</th>
                             </tr>
@@ -66,6 +67,7 @@
                                     <td>{{ $d['hari'] }}</td>
                                     <td>{{ substr($d['jamx']['jam'], 0, 5) }}</td>
                                     <td>{{ substr($d['jamy']['jam'], 0, 5) }}</td>
+                                    <td>{{ $d['penanggungjawab']['name'] ?? 'Belum ter-assign' }}</td>
                                     <td>
                                         @if ($d['status_ruang'] == 1)
                                             <button class="btn btn-sm btn-success" disabled>Tersedia</button>

@@ -680,6 +680,7 @@ class JadwalRuanganController extends BaseController
             'prodi_id',
             'angkatan_id',
             'status_ruang',
+            'user_id',
         ]);
 
         curl_setopt_array($curl, [
@@ -734,6 +735,7 @@ class JadwalRuanganController extends BaseController
         $ruang = Ruang::all();
         $jam = Jam::all();
         $angkatan = Angkatan::all();
+        $users = User::where('type', 0)->get();
         
         return view('admin/jadwal-ruangan/edit', [
             'title' => 'Edit Data Jadwal Ruangan',
@@ -743,6 +745,7 @@ class JadwalRuanganController extends BaseController
             'ruang' => $ruang,
             'jam' => $jam,
             'angkatan' => $angkatan,
+            'users' => $users,
             'data' => $data
         ]);
     }
@@ -760,6 +763,7 @@ class JadwalRuanganController extends BaseController
             'prodi_id',
             'angkatan_id',
             'status_ruang',
+            'user_id',
         ]);
 
         $curl = curl_init();

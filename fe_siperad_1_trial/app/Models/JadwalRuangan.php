@@ -19,7 +19,8 @@ class JadwalRuangan extends Model
         'jam_selesai_id',
         'prodi_id',
         'angkatan_id',
-        'status_ruang'
+        'status_ruang',
+        'user_id'
     ];
 
     public function Prodi()
@@ -60,4 +61,9 @@ class JadwalRuangan extends Model
     // public function peminjamanruang(): HasMany {
     //     return $this->hasMany(PeminjamanRuang::class);
     // }
+
+    public function PenanggungJawab()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

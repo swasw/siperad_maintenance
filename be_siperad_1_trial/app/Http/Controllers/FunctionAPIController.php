@@ -591,7 +591,7 @@ class FunctionAPIController extends Controller
 
     public function indexJadwalRuang()
     {
-        $data = JadwalRuangan::with(['prodi', 'angkatan', 'matkul', 'dosen', 'ruang', 'jamx', 'jamy'])->get();
+        $data = JadwalRuangan::with(['prodi', 'angkatan', 'matkul', 'dosen', 'ruang', 'jamx', 'jamy', 'Penanggungjawab'])->get();
         // $data = JadwalRuangan::all();
 
         if ($data->isEmpty()) {
@@ -782,7 +782,8 @@ class FunctionAPIController extends Controller
             'jam_selesai_id' => 'required|exists:jams,id',
             'prodi_id' => 'required',
             'angkatan_id' => 'required',
-            'status_ruang' => 'required'
+            'status_ruang' => 'required',
+            'user_id' => 'nullable'
         ]);
 
         if ($validator->fails()) {
@@ -826,7 +827,7 @@ class FunctionAPIController extends Controller
 
     public function getJadwalRuang($id)
     {
-        $data = JadwalRuangan::find($id);
+        $data = JadwalRuangan::with('Penanggungjawab')->find($id);
 
         if (!$data) {
             return response()->json(['message' => 'No data found'], 404);
@@ -846,7 +847,8 @@ class FunctionAPIController extends Controller
             'jam_selesai_id' => 'required',
             'prodi_id' => 'required',
             'angkatan_id' => 'required',
-            'status_ruang' => 'required'
+            'status_ruang' => 'required',
+            'user_id' => 'nullable'
         ]);
 
         if ($validator->fails()) {
